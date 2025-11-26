@@ -7,16 +7,42 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="app">
+     <!-- Rendered content goes here -->
+    <div id="app"></div>
+
+    <!-- Hidden Handlebars template -->
+    <script id="counter-template" type="text/x-handlebars-template">
         <h1>Counter</h1>
-        <p>Current Count: <span id="count" class="counter">0</span></p>
-        <button id="increment" >Increment</button>
-        <button id="decrement" >Decrement</button>
-        <br>
-        <br>
-         <button id="undo" >Undo</button>
-        <button id="redo" >Redo</button>
-    </div>
+
+        <p>Current Count: <span class="counter">{{count}}</span></p>
+
+        <button id="increment">Increment</button>
+
+        <button id="decrement" {{#if decDisabled}}disabled{{/if}}>
+            Decrement
+        </button>
+
+        <br><br>
+
+        <button id="undo" {{#if undoDisabled}}disabled{{/if}}>
+            Undo ({{undoLen}})
+        </button>
+
+        <button id="redo" {{#if redoDisabled}}disabled{{/if}}>
+            Redo ({{redoLen}})
+        </button>
+
+        <br><br>
+        <small>
+            UndoStack: [{{#each undo}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}] <br>
+            RedoStack: [{{#each redo}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}]
+        </small>
+    </script>
+
+    <!-- Handlebars CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+    <!-- Your JS -->
     <script src="script.js"></script>
 </body>
 </html>
