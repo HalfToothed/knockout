@@ -1,10 +1,10 @@
+let intervalId = "";
 let title = "";
 let text = "";
 let date = "";
 let list = "";
-let appDiv = document.getElementById("app")
-let countdownDiv = document.getElementById("countdown") 
-
+let appDiv = document.getElementById("app");
+let countdownDiv = document.getElementById("countdown");
 
 let allData = [];
 let id = 0;
@@ -48,44 +48,52 @@ function Remove(num) {
 
 function OpenCountdown(id) {
   var result = allData.find((obj) => obj.Id === id);
-  
-  appDiv.style.display = 'none'
 
-  let now = Date.now()
-  let d = parseLocalDate(result.Date)
+  appDiv.style.display = "none";
 
-  console.log(new Date(now))
-  console.log(new Date(d))
+  let d = parseLocalDate(result.Date);
 
-  let mil = d - now
-  let time = convertMiliseconds(mil)
+  let mil = 0;
+  debugger;
 
-  countdownDiv.innerHTML = `<h3>${result.Title}</h3> <br/><br/>
-                            <h1>${time.days}:${time.hours}:${time.minutes}:${time.seconds}</h1>`
+  var timer = function(){
+    
+    let now = Date.now();
+    mil = d - now;
 
-  console.log(`${time.days}:${time.hours}:${time.minutes}:${time.seconds}`);
+    if(mil == 0){
+      clearInterval(intervalId)
+    }
+
+    let time = convertMiliseconds(mil);
+
+    countdownDiv.innerHTML = `<h3>${result.Title}</h3> <br/><br/>
+                            <h1>${time.days}:${time.hours}:${time.minutes}:${time.seconds}</h1>
+                            <button>Back</button>`;
+  }
+
+  intervalId = setInterval(timer,1000);
 
 }
 
-
-function convertMiliseconds(ms){
-  let day = Math.floor(ms/ (24 * 3600000))
-  ms %= (24*3600000)
-  let hour = Math.floor(ms/3600000)
-  ms %= 3600000
-  let min = Math.floor(ms/60000)
-  ms %= 60000
-  let sec = Math.floor(ms/1000)
+function convertMiliseconds(ms) {
+  let day = Math.floor(ms / (24 * 3600000));
+  ms %= 24 * 3600000;
+  let hour = Math.floor(ms / 3600000);
+  ms %= 3600000;
+  let min = Math.floor(ms / 60000);
+  ms %= 60000;
+  let sec = Math.floor(ms / 1000);
 
   return {
     days: day,
-    hours : hour,
+    hours: hour,
     minutes: min,
-    seconds: sec
-  }
+    seconds: sec,
+  };
 }
 
 function parseLocalDate(dateString) {
-    const [year, month, day] = dateString.split("-").map(Number);
-    return new Date(year, month - 1, day, 0, 0, 0); // Local midnight
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day, 0, 0, 0); // Local midnight
 }
