@@ -1,0 +1,150 @@
+/* ----------- Base ----------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  background: #f4f5f7; /* light, neutral, modern */
+  color: #1e1e1e;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ----------- App Container ----------- */
+#app {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 700px) {
+  #app {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----------- Input Section ----------- */
+.input {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 18px;
+  background: #fafafa;
+}
+
+.input label {
+  display: block;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.input input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  background: white;
+}
+
+.input input:focus {
+  border-color: #0078ff;
+  outline: none;
+}
+
+/* ---------- Button ---------- */
+button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0078ff;
+  color: white;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #0063d6;
+}
+
+/* ----------- List Section ----------- */
+#list {
+  border: 1px solid #dcdcdc;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fafafa;
+  min-height: 200px;
+}
+
+#list li {
+  list-style: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#list li:hover {
+  background: #f1f1f1;
+}
+
+/* Remove button inside list */
+#list li button {
+  background: #e53935;
+  padding: 6px 10px;
+}
+
+#list li button:hover {
+  background: #c62828;
+}
+
+/* ----------- Countdown Screen ----------- */
+#countdown {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+}
+
+#countdown h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#countdown h1 {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  color: #1e1e1e;
+}
+
+#countdown button {
+  background: #0078ff;
+}
+
+#countdown button:hover {
+  background: #0063d6;
+}

@@ -5,6 +5,7 @@ let date = "";
 let list = "";
 let appDiv = document.getElementById("app");
 let countdownDiv = document.getElementById("countdown");
+countdownDiv.style.display = "none";
 
 let allData = [];
 let id = 0;
@@ -50,8 +51,9 @@ function OpenCountdown(id) {
   var result = allData.find((obj) => obj.Id === id);
 
   appDiv.style.display = "none";
-
-  let d = parseLocalDate(result.Date);
+  countdownDiv.style.display = "";
+  
+  let parsedDate = parseLocalDate(result.Date);
 
   let mil = 0;
   debugger;
@@ -59,21 +61,47 @@ function OpenCountdown(id) {
   var timer = function(){
     
     let now = Date.now();
-    mil = d - now;
+    mil = parsedDate - now;
 
     if(mil == 0){
       clearInterval(intervalId)
     }
 
     let time = convertMiliseconds(mil);
+    
+    let d = time.days
+    if(d < 10){
+      d = "0"+d
+    }
+
+    let h = time.hours
+    if(h < 10){
+      h = "0"+h
+    }
+    
+    let m = time.minutes
+    if(m < 10){
+      m = "0"+m
+    }
+
+    let s = time.seconds
+    if(s < 10){
+      s = "0"+s
+    }
 
     countdownDiv.innerHTML = `<h3>${result.Title}</h3> <br/><br/>
-                            <h1>${time.days}:${time.hours}:${time.minutes}:${time.seconds}</h1>
-                            <button>Back</button>`;
+                            <h1>${d}:${h}:${m}:${s}</h1>
+                            <button onClick="Back()">Back</button>`;
   }
 
   intervalId = setInterval(timer,1000);
 
+}
+
+function Back(){  
+  countdownDiv.style.display = 'none'
+  appDiv.style.display = '';
+  clearInterval(intervalId)
 }
 
 function convertMiliseconds(ms) {
