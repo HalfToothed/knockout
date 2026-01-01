@@ -10,6 +10,16 @@ countdownDiv.style.display = "none";
 let allData = [];
 let id = 0;
 
+const input = document.getElementById("date");
+
+const today = new Date();
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, "0");
+const day = String(today.getDate() + 1).padStart(2, "0");
+
+input.min = `${year}-${month}-${day}`;
+
+
 function submitButton() {
   title = document.getElementById("title").value;
   text = document.getElementById("text").value;
