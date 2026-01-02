@@ -7,7 +7,11 @@ let appDiv = document.getElementById("app");
 let countdownDiv = document.getElementById("countdown");
 countdownDiv.style.display = "none";
 
-let allData = [];
+// Retrieving the string
+let retString = localStorage.getItem("key")
+
+let allData = JSON.parse(retString) || [];
+
 let id = 0;
 
 const input = document.getElementById("date");
@@ -19,12 +23,12 @@ const day = String(today.getDate() + 1).padStart(2, "0");
 
 input.min = `${year}-${month}-${day}`;
 
-
 function submitButton() {
   title = document.getElementById("title").value;
   text = document.getElementById("text").value;
   date = document.getElementById("date").value;
-  id += 1;
+
+  id = new Date().getTime();
 
   let person = {
     Id: id,
@@ -33,7 +37,12 @@ function submitButton() {
     Date: date,
   };
 
+  
   allData.push(person);
+  let newData = JSON.stringify(allData)
+  localStorage.clear();
+  localStorage.setItem('key', newData);
+
 
   list = document.getElementById("list");
 
@@ -66,7 +75,6 @@ function OpenCountdown(id) {
   let parsedDate = parseLocalDate(result.Date);
 
   let mil = 0;
-  debugger;
 
   var timer = function(){
     
