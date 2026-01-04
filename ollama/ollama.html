@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ollama Chat</title>
+</head>
+<body>
+    <div id="chat"></div>
+    <input type="text" id="input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('input');
+            const message = input.value;
+            
+            const response = await fetch('http://localhost:11434/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'deepseek-r1', // or whatever model you're using
+                    prompt: message,
+                    stream: false
+                })
+            });
+            
+            const data = await response.json();
+            document.getElementById('chat').innerHTML += `<p><b>You:</b> ${message}</p>`;
+            document.getElementById('chat').innerHTML += `<p><b>AI:</b> ${data.response}</p>`;
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
